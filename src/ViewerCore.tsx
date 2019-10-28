@@ -179,8 +179,8 @@ export default class ViewerCore extends React.Component<ViewerProps, ViewerCoreS
       realImgHeight = activeImage.defaultSize.height;
     }
     let [width, height] = this.getImgWidthHeight(realImgWidth, realImgHeight);
-    let left = (this.containerWidth - width) / 2;
-    let top = (this.containerHeight - height - this.footerHeight) / 2;
+    let left = Math.floor((this.containerWidth - width) / 2);
+    let top = Math.floor((this.containerHeight - height - this.footerHeight) / 2);
     let scaleX = this.props.defaultScale;
     let scaleY = this.props.defaultScale;
     if (this.props.noResetZoomAfterChange && isNewImage) {
@@ -359,8 +359,8 @@ export default class ViewerCore extends React.Component<ViewerProps, ViewerCoreS
         this.state.imageWidth,
         this.state.imageHeight,
       );
-      left = (this.containerWidth - imgWidth) / 2;
-      top = (this.containerHeight - this.footerHeight - imgHeight) / 2;
+      left = Math.floor((this.containerWidth - imgWidth) / 2);
+      top = Math.floor((this.containerHeight - this.footerHeight - imgHeight) / 2);
       width = this.state.width + imgWidth;
       height = this.state.height + imgHeight;
       scaleX = scaleY = 1;
@@ -372,8 +372,8 @@ export default class ViewerCore extends React.Component<ViewerProps, ViewerCoreS
       if (Math.abs(scaleX) < 0.1 || Math.abs(scaleY) < 0.1) {
         return;
       }
-      top = this.state.top + -direct * diffY / this.state.scaleX * scale * directX;
-      left = this.state.left + -direct * diffX / this.state.scaleY * scale * directY;
+      top = Math.floor(this.state.top + -direct * diffY / this.state.scaleX * scale * directX);
+      left = Math.floor(this.state.left + -direct * diffX / this.state.scaleY * scale * directY);
       width = this.state.width;
       height = this.state.height;
     }
@@ -404,8 +404,8 @@ export default class ViewerCore extends React.Component<ViewerProps, ViewerCoreS
   handleResize = () => {
     this.setContainerWidthHeight();
     if (this.props.visible) {
-      let left = (this.containerWidth - this.state.width) / 2;
-      let top = (this.containerHeight - this.state.height - this.footerHeight) / 2;
+      let left = Math.floor((this.containerWidth - this.state.width) / 2);
+      let top = Math.floor((this.containerHeight - this.state.height - this.footerHeight) / 2);
       this.setState({
         left: left,
         top: top,
